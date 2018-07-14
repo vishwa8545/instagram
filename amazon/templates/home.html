@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+wellcome {{ name }}
+<hr>
+<h1>Here Is ur Latest Posts </h1>
+{% for post in posts %}
+<h2>{{post.post_data}}</h2>
+<hr>
+{% endfor %}
+<hr>
+<form  id="upload-form" action="/api/upload" method="POST" enctype="multipart/form-data">
+    <input type="text" name ="op_type" value="add_post" hidden>
+    <input type="text " name="post_data" placeholder="text" required>
+    <input type="submit" name="submit" value="Add_post">
+
+</form>
+
+
+</body>
+</html>
