@@ -1,8 +1,7 @@
 import  os
 from flask import send_from_directory,render_template,session
-from amazon.models import users
 from bson import ObjectId
-from amazon.models import db
+from insta.models import db
 
 
 
@@ -56,19 +55,23 @@ def add_post(post_text,user_id):
         'post_data':post_text
     }
     db['posts'].insert_one(posts)
-    filter = {
-        'user_id':ObjectId(user_id)
-    }
-    cursor = db['posts'].find(filter)
+    cursor = db['posts'].find()
     if cursor.count()>0:
         return cursor
     else:
         return False
-def search_by_post_name(post_text):
-    filter = { 'post_data':post_text}
+def search_post(user_id):
+    filter = { 'user_id':user_id}
     cursor = db['posts'].find(filter)
     print(type(cursor))
     if cursor.count()>0:
-        return cursor[0]['_id']
+        return cursor
+    else:
+        return None
+def user_posts():
+    cursor = db['posts'].find()
+    print(type(cursor))
+    if cursor.count() > 0:
+        return cursor
     else:
         return None

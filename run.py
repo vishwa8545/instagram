@@ -1,6 +1,5 @@
-from flask import Flask, send_from_directory,request,jsonify
-from flask_bootstrap import Bootstrap
-from amazon import app
+
+from insta import app
 
 
 

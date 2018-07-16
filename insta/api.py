@@ -1,9 +1,9 @@
 import os
 from flask import request,jsonify,send_from_directory,render_template,session
-from flask_bootstrap import Bootstrap
-from amazon import app
-from amazon.models import products,users
-Bootstrap(app)
+
+from insta import app
+from insta.models import products,users
+
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -33,7 +33,8 @@ def login():
         if sucess:
             matched = users.search_by_name(username)
             session['user_id'] = str(matched['_id'])
-            return render_template('home.html', name = matched['name'])
+            posts = users.user_posts()
+            return render_template('home.html', name = matched['name'],posts = posts)
         else:
             return render_template('index.html',message ='incorrect username/password')
 
